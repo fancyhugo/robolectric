@@ -11,12 +11,12 @@ import org.robolectric.shadows.ShadowCursorAdapter;
 public class ShadowMapTest {
   @Test public void shouldLookUpShadowClassesByNamingConvention() throws Exception {
     ShadowMap map = new ShadowMap.Builder().build();
-    assertThat(map.get(CursorAdapter.class)).isNull();
+    assertThat(map.getShadowInfo(CursorAdapter.class, -1)).isNull();
   }
 
   @Test public void shouldNotReturnMismatchedClassesJustBecauseTheSimpleNameMatches() throws Exception {
     ShadowMap map = new ShadowMap.Builder().build();
-    assertThat(map.get(android.widget.CursorAdapter.class).shadowClassName).isEqualTo(ShadowCursorAdapter.class.getName());
+    assertThat(map.getShadowInfo(android.widget.CursorAdapter.class, -1).shadowClassName).isEqualTo(ShadowCursorAdapter.class.getName());
   }
 
   @Test public void getInvalidatedClasses_disjoin() {
